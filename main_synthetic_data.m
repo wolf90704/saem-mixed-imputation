@@ -86,7 +86,10 @@ for mc = 1:MC
     % Introduce missing values (MCAR mechanism)
     data_with_missing = generate_mcar(X, 0.3);
     data_with_missing_test = generate_mcar(X_test, 0.3);
+    % data_with_missing = generate_mar(X);
+    % data_with_missing_test = generate_mar(X_test);
 
+    
     %% SAEM Algorithm
     [Beta_saem(:,mc), mu_SAEM(:,mc), Sigma_SAEM(:,:,mc), px(:,mc), p_xm(:,mc)] = M_SAEM_MIXED(data_with_missing, y, beg);
     y_pred_saem = y_predict_saem(data_with_missing_test, mu_SAEM(:,mc)', Sigma_SAEM(:,:,mc), nb_Sample_mcmc, beg, p_xm(:,mc), px(:,mc), Beta_saem(:,mc), num_class);
